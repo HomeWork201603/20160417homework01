@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        body,#change{
+            margin:0;
+            padding: 0;
+        }
+        ul,li{list-style: none;}
+        #change{
+            width: 300px;
+            border: rgba(79, 255, 85, 0.95) 1px solid;
+            margin: 30px auto;
+        }
+        #change ul{}
+        #change ul li{
+            width: 50px;
+            text-align: center;
+            height: 30px;
+            line-height: 30px;
+            font-size: 1.25em;
+            float: left;
+            border: rgba(0, 0, 0, 0.53) 1px solid;
+        }
+        #change ul li.select{background-color: rgba(79, 255, 85, 0.95);}
+        #change div{
+            width: 300px;
+            height: 300px;
+            display:none;
+            clear: both;
+        }
+        #change div.select{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="change">
+    <ul>
+        <li class="select">视频</li>
+        <li>新闻</li>
+        <li>秒拍</li>
+    </ul>
+    <div class="select">视频neirong</div>
+    <div>xinwen</div>
+    <div>miaopai</div>
+
+</div>
+<script>
+    var oTab=document.getElementById("change");
+    var oLis=oTab.getElementsByTagName("li");
+    var oDivs=oTab.getElementsByTagName("div");
+    for(var i=0; i<oLis.length; i++){
+        -function(i){
+            oLis[i].onmouseover = function () {
+                for (var j = 0; j < oLis.length; j++) {
+                    oLis[j].className = "";
+                    oDivs[j].className = "";
+                }
+                this.className = "select";
+                oDivs[i].className = "select";
+            }
+        }(i)
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body,div,ul,li{
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft yahei", Arial, SimSun;
+            font-size: 14px;
+        }
+        ul{
+            list-style: none;
+        }
+        .clear{
+            clear: both;
+        }
+        #tab{
+            margin: 30px auto;
+            width: 300px;
+        }
+        #tab ul{
+            width: 300px;
+            height: 30px;
+        }
+        #tab li{
+            float: left;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background-color: #0cc65b;
+        }
+        #tab div{
+            display: none;
+            width: 300px;
+            height: 300px;
+            line-height: 300px;
+            text-align: center;
+            background-color: #CCCCCC;
+        }
+        #tab .on{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="tab">
+    <ul>
+        <li>北京</li>
+        <li>天津</li>
+        <li>南京</li>
+        <span class="clear"></span>
+    </ul>
+    <div class="on">在北京</div>
+    <div>在天津</div>
+    <div>在南京</div>
+</div>
+<script>
+    var oLis=document.getElementById('tab').getElementsByTagName('li');
+    var oDiv=document.getElementById('tab').getElementsByTagName('div');
+    for(i=0;i<oLis.length;i++){
+        (function (i){
+            oLis[i].onmouseover=function(){
+                change(i);
+            }
+        })(i)
+    }
+    function change(j){
+        for(m=0;m<oDiv.length;m++){
+            oDiv[m].style.display='none';
+        }
+        oDiv[j].style.display='block';
+    }
+</script>
+</body>
+</html>

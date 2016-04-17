@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+Array.prototype.mySlice=function(){
+	debugger	
+	var final=[];
+	var fir=isNaN(arguments[0])?null:arguments[0]>=0?Number(arguments[0]):Number(arguments[0])+this.length;
+	var sec=arguments[1]>=0?Number(arguments[1]):Number(arguments[1])+this.length>fir?Number(arguments[1])+this.length:null;//负数后面才这样写
+	if (!fir) {//一个都没传 arguments.length===0
+		for (var i = 0; i < this.length; i++) {
+			final[final.length]=this[i];
+		}
+		return final;
+	}
+	if (!sec) {//arguments.length===1
+		for (var i = fir; i < this.length; i++) {
+			final[final.length]=this[i];
+		}
+		return final;
+	}
+	if (fir>sec) {
+		var temp=fir;
+		fir=arguments[1];
+		sec=temp;		
+	}
+	if (isNaN(fir)) {
+		return final;
+	}
+	for (var i = fir; i < sec; i++) {
+		final[final.length]=this[i];
+	}
+	return final;
+}
+//checked
+var ary=[1,2,3,4,5,6];
+console.log(ary.mySlice(-2,1));
+
+</script>
+</html>

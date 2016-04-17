@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>选项卡</title>
+    <style type="text/css">
+        html, body, div, ul, li {
+            margin: 0px;
+            padding: 0px;
+            font-size: 16px;
+        }
+        #tab ul {
+            position: relative;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        #tab {
+            width: 500px;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 10px;
+            margin: 20px auto;
+        }
+        ul li {
+            float: left;
+            width: 100px;
+            border: 1px solid green;
+            cursor: pointer;
+
+        }
+        #tab div {
+            clear: both;
+            width: 500px;
+            height: 300px;
+            border: 1px solid goldenrod;
+            display: none;
+        }
+        #tab div.select {
+            display: block;
+        }
+        #tab li.select {
+            background-color: aqua;
+        }
+
+    </style>
+</head>
+<body>
+<div id="tab">
+    <ul>
+        <li class="select">新闻</li>
+        <li>视频</li>
+        <li>nba</li>
+    </ul>
+    <div class="select">新闻内容</div>
+    <div>视频内容</div>
+    <div>nba内容</div>
+</div>
+<script type="text/javascript">
+    var oTab=document.getElementById("tab");
+    var olis=oTab.getElementsByTagName("li");
+    var oDivs=oTab.getElementsByTagName("div");
+    function changTab(index){
+        for(var i=0;i<olis.length;i++){
+            olis[i].className="";
+            oDivs[i].className="";
+        }
+        olis[index].className="select";
+        oDivs[index].className="select";
+    }
+    for(var i=0;i<olis.length;i++){
+        (function(i){
+            olis[i].onmouseover=function(){
+                changTab(i);
+            }
+        })(i);
+    }
+    console.log(i);
+</script>
+
+</body>
+</html>

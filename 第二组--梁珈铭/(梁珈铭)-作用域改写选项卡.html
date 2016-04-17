@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>作用域实现选项卡</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul,li{
+			list-style: none;
+		}
+		#box{
+			width: 500px;
+			margin: 0 auto;
+		}
+		#box ul{
+
+		}
+		#box ul li{
+			float: left;
+			width: 100px;
+			height: 100px;
+			line-height: 100px;
+			text-align: center;
+			border: 1px solid #ccc;
+			cursor: pointer;
+		}
+		#box div{
+			clear: both;
+			display: none;
+			width: 500px;
+			height: 400px;
+			line-height: 400px;
+			border:1px solid #ccc;
+			text-align: center;
+		}
+		#box ul li.select{
+			background-color: red;
+		}
+		#box div.select{
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<ul>
+			<li class="select">1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+		<div class="select">1</div>
+		<div>2</div>
+		<div>3</div>
+	</div>
+</body>
+<script type="text/javascript">
+var oBox=document.getElementById("box");
+var oLis=oBox.getElementsByTagName("li");
+var oDivs=oBox.getElementsByTagName("div");
+
+function tabChange(index){
+	for (var i = 0; i < oLis.length; i++) {
+		oLis[i].className="";
+		oDivs[i].className="";
+	}
+	oLis[index].className="select";
+	oDivs[index].className="select";
+}
+//1、开始改写为私有作用域
+for (var i = 0; i < oLis.length; i++) {
+	//相当于var i=0写在这里
+	//因为在全局作用域下的异步机制导致代码执行完才执行绑定事件，i直接就是3了，所以要通过自执行函数来封装，私有作用域里有i，那么xxxfff000就不会往全局查找变量i了--->也就不会变为3了
+	(function(i){
+		oLis[i].onclick=function(){
+			tabChange(i);//这里产生的堆内存被形参的i占用，因为点击事件所绑定的堆内存xxxfff000中没有i，所以会往上一级查找，堆内存xxxfff000不销毁；反正我要保证这里的i跟外面标签的i一样
+		}
+	})(i);
+}
+
+
+//2、反正要保证绑定事件的i不能为3
+for (var i = 0; i < oLis.length; i++) {
+		oLis[i].onclick=(function(i){//xxxfff000
+			return function(){//xxxfff111
+				tabChange(i);//当点击oLis标签的时候会发生预解释，当前所在作用域没有声明过i，往上查找，在事件所绑定的堆内存xxxfff000中找到了形参i，而又因为自执行函数的作用域里的变量不受外界影响【闭包】，所以堆内存xxxfff111执行时里面的i不会变为3--->不去全局作用域下找变量i了，也就不会变为3了
+			}
+		})(i)
+}
+
+//改造总结：【用预解释的角度去理解】让一个变量不去全局作用域找对应变量，可以选择用自执行函数包起来，只要私有作用域里的形参存在对应变量，就不会受到全局影响了；【用销毁的角度去理解】
+
+
+//3、一次过写完
+for (var i = 0; i < oLis.length; i++) {
+		oLis[i].onclick=(function(i){//xxxfff000
+			return function(){//xxxfff111
+				for (var j= 0; j< oLis.length;j++) {
+					oLis[j].className="";
+					oDivs[j].className="";
+				}
+				oLis[i].className="select";
+				oDivs[i].className="select";
+			}
+		})(i)
+}
+//同上解释
+
+</script>
+</html>

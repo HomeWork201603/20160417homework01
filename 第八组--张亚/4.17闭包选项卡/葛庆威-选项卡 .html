@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft Yahei", Arial, SimSun;
+
+        }
+        ul{
+            list-style: none;
+        }
+        #tab{
+            width: 500px;
+            margin: 50px auto;
+        }
+        #tab li{
+            float: left;
+            margin-right: 10px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+        #tab li.box{
+            background: #00c0a5;
+        }
+        #tab div{
+            display: none;
+            clear: both;
+            height: 200px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 20px;
+
+        }
+        #tab div.box{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="tab">
+    <ul>
+        <li class="box">1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <div class="box">1</div>
+    <div>2</div>
+    <div>3</div>
+</div>
+</body>
+<script>
+    var oTab=document.getElementById("tab");
+    var oli=oTab.getElementsByTagName("li");
+    var odiv=oTab.getElementsByTagName("div");
+    function tap(n) {
+        for (var i = 0; i < oli.length; i++) {
+            oli[i].className = "";
+            odiv[i].className = "";
+        }
+        oli[n].className = "box";
+        odiv[n].className = "box";
+    }
+    for(var i=0;i<oli.length;i++){
+        (function(i){
+           oli[i].onclick=function(){
+                tap(i);
+            }
+        })(i);
+    }
+</script>
+</html>

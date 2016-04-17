@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>myslice练习</title>
+</head>
+<body>
+<script>
+    Array.prototype.myslice = function () {
+        var fir = Number(arguments[0]), sec = Number(arguments[1]);
+
+        function slice(a, b, c) {
+            var ary = [];
+            for (var i = a; i < b; i++) {
+                ary[ary.length] = c[i];
+            }
+            return ary;
+        }
+
+        if (arguments[0] == undefined) {//没有传参
+            return slice(0, this.length, this);
+        } else if (!isNaN(arguments[0]) && arguments[1] == undefined) {//一项有效数字
+            if (fir >= 0) {//大于零
+                if (fir < this.length) {
+                    return slice(fir, this.length, this)
+                } else {
+                    return [];
+                }
+            } else if (fir + this.length >= 0) {//小于零但还能取到部分项
+                return slice(fir + this.length, this.length, this);
+            } else {
+                return slice(0, this.length, this);
+            }
+        } else if (!isNaN(fir) && !isNaN(sec)) {//两项有效数字
+            if (fir < sec) {//第一项小于第二项
+                if (fir >= 0) {//都大于零
+                    if (sec <= this.length) {
+                        return slice(fir, sec, this);
+                    } else {
+                        return slice(fir, this.length, this);
+                    }
+                } else if (sec < 0) {//都小于零
+                    if (fir + this.length >= 0) {
+                        return slice((fir + this.length), (sec + this.length), this)
+                    } else {
+                        return slice(0, (sec + this.length), this)
+                    }
+                } else if (sec === 0) {//第二项为零
+                    return [];
+                } else {//第一项小于零，第二项大于零
+                    if (fir + this.length < sec && fir + this.length >= 0 && sec <= this.length) {
+                        return slice((fir + this.length), sec, this);
+                    } else if (fir + this.length >= 0 && sec > this.length) {
+                        return slice((fir + this.length), this.length, this);
+                    } else if (fir + this.length < 0 && sec > this.length) {
+                        return slice(0, this.length, this);
+                    } else if (fir + this.length < 0 && sec <= this.length) {
+                        return slice(0, sec, this);
+                    } else {
+                        return [];
+                    }
+                }
+            } else {//第一项大于等于第二项
+                return [];
+            }
+        } else {//存在非有效数字等其他情况
+            return [];
+        }
+    };
+    var ary = [5, 8, 9, 4, 3, 1];
+    //    var cur = ary.myslice('k',4);
+    //    var cur1 = ary.slice('k',4);//这个居然能输出，从索引0到4
+    //    var cur = ary.myslice(2,'f');
+    //    var cur1 = ary.slice(2,'f');//这种情况不会出问题，都输出[]
+    //    var cur = ary.myslice('k');
+    //    var cur1 = ary.slice('k');//这个居然复制了一个数组
+//    var cur = ary.myslice(false);
+//    var cur1 = ary.slice(false);都没有针对boolean做特殊处理
+    var cur = ary.myslice(0,2,6,55,8);
+    var cur1 = ary.slice(0,2,6,55,8);
+    console.log(cur);
+    console.log(cur1);
+</script>
+</body>
+</html>

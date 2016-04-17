@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #oTab{
+            margin: 50px auto;
+            padding: 10px;
+            width: 700px;
+            height: 500px;
+            border: 1px solid #ff6600;
+        }
+        #oTab li{
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+            line-height: 30px;
+            border: 1px solid #ff6600;
+        }
+        #oTab div{
+            display: none;
+            width: 600px;
+            height: 400px;
+            border: 1px solid #1b66c7;
+        }
+        #oTab div.on{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="oTab">
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+    </ul>
+    <div class="on">11</div>
+    <div>22</div>
+    <div>33</div>
+</div>
+<script>
+    var oTab = document.getElementById('oTab');
+    var oLis = oTab.getElementsByTagName('li');
+    var oDivs = oTab.getElementsByTagName('div');
+    function tab(index) {
+        for(var i = 0;i<oLis.length;i++){
+            oDivs[i].className = '';
+        }
+        oDivs[index].className = 'on';
+    }
+    //自定义属性
+    /*for(var i = 0;i<oLis.length;i++){
+        oLis[i].num = i;
+        oLis[i].onmouseover = function () {
+            tab(this.num);
+        }
+    }*/
+
+    for(var i = 0;i<oLis.length;i++){
+        (function (i) {
+            oLis[i].onmouseover = function () {
+                tab(i);
+            }
+        })(i);
+    }
+
+
+
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

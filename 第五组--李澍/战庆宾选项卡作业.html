@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>战庆宾--选项卡</title>
+    <style>
+        *{	margin: 0;
+            padding: 0;	 }
+        #tab{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            border: 1px solid red;
+            margin-left: -250px;
+            margin-top: -200px;
+            width: 500px;
+            height: 400px;		}
+        ul li{
+            list-style: none;
+            display:inline-block;
+            width: 50px;
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid #c25f13;
+            border-radius: 1em;
+            text-align: center;		}
+        #tab div{
+            border: 1px solid orange;
+            width:400px;
+            height: 100px;
+            display: none;
+            text-align: center;	}
+        ul li.active{
+            background: -webkit-linear-gradient(red,orange,yellow);		}
+        #tab div.active{
+            display: block;
+            margin-top: -1px;
+            z-index: 1;
+            position: relative;		}
+    </style>
+</head>
+<body>
+<div id="tab">
+    <ul>
+        <li class="active">百度</li>
+        <li>腾讯</li>
+        <li>阿里</li>
+    </ul>
+    <div class="active">李彦宏请您吃饭</div>
+    <div>马化腾请您吃饭</div>
+    <div>马云请您吃饭</div>
+</div>
+</body>
+</html>
+<script>
+    var oTab = document.getElementById('tab');
+    var oLis = oTab.getElementsByTagName('li');
+    var oDivs = oTab.getElementsByTagName('div');
+    function tab(n){
+        for(var i = 0; i<oLis.length;i++){
+            oLis[i].className = "";
+            oDivs[i].className = "";
+        }
+        oLis[n].className="active";
+        oDivs[n].className="active";
+    }
+    for(var i = 0; i<oLis.length;i++){
+        (function (i){
+            oLis[i].onclick = function (){
+                tab(i);
+            }
+        })(i);
+    }
+          /*老师，试了好久才搞出来，学的不扎实啊   哈哈哈*/
+</script>

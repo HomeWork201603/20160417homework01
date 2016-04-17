@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #tab{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: 1px solid #4bcdd9;
+            margin-left: -250px;
+            margin-top: -200px;
+            width: 500px;
+            height: 400px;
+        }
+        ul li{
+            display: inline-block;
+            list-style: none;
+            width: 90px;
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid saddlebrown;
+            border-radius: 1em;
+            text-align: center;
+        }
+        #tab div{
+            display: none;
+            border: 1px solid #05A939;
+            width: 499px;
+            height: 358px;
+        }
+        ul li.active{
+            background: -webkit-radial-gradient(blue,red,orange);
+        }
+        #tab div.active{
+            display: block;
+            position: relative;
+            margin-top: -1px;
+            z-index: 10;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="tab">
+        <ul>
+            <li class="active">新闻</li>
+            <li>图片</li>
+            <li>军事</li>
+        </ul>
+        <div class="active">新闻内容</div>
+        <div>图片内容</div>
+        <div>军事内容</div>
+    </div>
+<script type="text/javascript">
+    var oTab=document.getElementById('tab');
+    var oLi=oTab.getElementsByTagName('li');
+    var oDiv=oTab.getElementsByTagName('div');
+/*    function tab(n){
+        for (var i=0;i<oLi.length;i++){
+             oLi[i].className="";
+             oDiv[i].className="";
+        }
+        oLi[n].className="active";
+        oDiv[n].className="active";
+    }
+    for (var i=0;i<oLi.length;i++){
+        oLi[i]['zhufeng']=i;
+        oLi[i].onclick=function(){
+            tab(this.zhufeng);
+        }
+    }*/
+
+
+    for (var i=0;i<oLi.length;i++){
+        (function(i){
+            oLi[i].onclick=function(){
+            for (var j= 0;j<oDiv.length;j++){
+                oLi[j].className="";
+                oDiv[j].className="";
+            }
+            oLi[i].className="active";
+            oDiv[i].className="active";
+            };
+        })(i);
+    }
+
+
+</script>
+</body>
+</html>

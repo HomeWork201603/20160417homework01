@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>选项卡</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        #tab{
+            width: 500px;
+            height: 400px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            border: 1px solid #cb00f0;
+            margin-left: -250px;
+            margin-top: -200px;
+
+        }
+        ul li{
+            display: inline-block;
+            list-style: none;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid #f57614;
+            border-radius: 8px;
+            text-align: center;
+            letter-spacing: 3px;
+        }
+        #tab div{
+            display: none;
+            width:400px;
+            height: 100px;
+            line-height: 100px;
+            border:1px solid #3f76c9;
+            text-align: center;
+            letter-spacing: 4px;
+            color: #b25415;
+            font-size: 24px;
+        }
+        ul li.active{
+            background: red;
+
+
+        }
+        #tab div.active{
+            display: block;
+            margin-top:-1px;
+            position: relative;
+            z-index: 10;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<div id="tab">
+
+
+    <ul>
+        <li class="active">新闻</li>
+        <li >图片</li>
+        <li>均是 航空</li>
+
+    </ul>
+    <div class="active">新闻内容</div>
+    <div>图片内容</div>
+    <div>均是 航空内容</div>
+</div>
+
+    <script>
+        var Tab = document.getElementById('tab');
+        var Lis = Tab.getElementsByTagName('li');
+        var Divs = Tab.getElementsByTagName('div');
+        for(var i=0;i<Lis.length;i++) {
+            (function tab(n) {
+                Lis[n].onmouseover = function () {
+                    for (var i = 0; i < Lis.length; i++) {
+                        Lis[i].className = "";
+                        Divs[i].className = "";
+                    }
+                    Lis[n].className = "active";
+                    Divs[n].className = "active";
+                }
+            })(i)
+        }
+
+       /*for(var i=0;i<Lis.length;i++){
+           //Lis[i].shenfenzheng = i;
+           Lis[i].onmouseover=function(){
+
+               //alert(this.shenfenzheng);
+               tab(this.shenfenzheng);
+               //tab(this.getAttribute("index"))
+           }
+       }*/
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body,div,ul,li{
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft Yahei", Arial, SimSun;
+            font-size: 14px;
+        }
+        ul,li{
+            list-style: none;
+        }
+        #tab{
+            margin: 10px auto 0;
+            width: 500px;
+        }
+        #tab ul{
+            position: relative;
+            top: 1px;
+            z-index: 100;
+        }
+        #tab ul li{
+            float: left;
+            margin-left: 10px ;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid #c9ced2;
+            border-radius: 9px;
+            cursor: pointer;
+        }
+        #tab ul li.ace{
+            border-bottom:none ;
+            background: #92a8b3;
+        }
+        #tab div{
+            display: none;
+            clear: both;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            border: 1px solid #59AfE4;
+            border-radius: 4px;
+            background-color: #00c0a5;
+        }
+        #tab div.ace{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="tab">
+    <ul>
+        <li class="ace">北京</li>
+        <li>天津</li>
+        <li>上海</li>
+    </ul>
+    <div class="ace">故宫</div>
+    <div>摩天轮</div>
+    <div>东方明珠</div>
+</div>
+
+<script>
+
+    var oTab = document.getElementById("tab");
+    var oLis = oTab.getElementsByTagName("li");
+    var oDiv = oTab.getElementsByTagName("div");
+    for(var i=0;i<oLis.length;i++){
+        (function (i) {
+            oLis[i].onclick= function () {
+                for(var j=0;j<oDiv.length;j++){
+                    oLis[j].className="";
+                    oDiv[j].className="";
+                }
+                oLis[i].className="ace";
+                oDiv[i].className="ace"; 
+            }
+        })(i)
+    }
+</script>
+</body>
+</html>

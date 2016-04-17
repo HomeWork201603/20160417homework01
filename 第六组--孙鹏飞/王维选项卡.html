@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #wrap{
+            margin: 60px auto 0;
+            width: 500px;
+        }
+        ul{
+            list-style: none;
+        }
+        ul li{
+            float: left;
+            margin-right: 5px;
+            border:1px solid #ccc9c9;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+        }
+        #wrap div{
+            clear: both;
+            display: none;
+            width: 315px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+        }
+        #wrap .select{
+            display: block;
+            background: #0cc65b;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <ul>
+        <li class="select">北</li>
+        <li>上</li>
+        <li>广</li>
+    </ul>
+    <div class="select">北京</div>
+    <div>上海</div>
+    <div>广州</div>
+</div>
+<script>
+    var vDiv=document.getElementById("wrap");
+    var liList=vDiv.getElementsByTagName("li");
+    var divList=vDiv.getElementsByTagName("div");
+    for(var i=0;i<liList.length;i++){
+        ;(function(x){
+            liList[x].onmouseover= function () {
+                for(var j=0;j<liList.length;j++){
+                    liList[j].className="";
+                    divList[j].className="";
+                }
+                liList[x].className="select";
+                divList[x].className="select";
+            }
+        })(i);
+
+    }
+
+/*    for(var i=0;i<3;i++){fn(i);}
+    function fn(i){
+        liList[i].onmouseover= function () {
+            for(var j=0;j<liList.length;j++){
+                liList[j].className="";
+                divList[j].className="";
+            }
+            liList[i].className="select";
+            divList[i].className="select";
+        }
+    }*/
+
+
+</script>
+</body>
+</html>

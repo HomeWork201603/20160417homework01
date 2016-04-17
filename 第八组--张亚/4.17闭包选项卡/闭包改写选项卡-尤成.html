@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    div#wrap {
+      width: 500px;
+      margin: 150px auto;
+    }
+    div ul {
+      margin-left: 15px;
+    }
+    div li {
+      display: inline-block;
+      list-style: none;
+      width:100px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      background-color: #eee;
+      margin: 0 10px;
+      color: #66757F;
+    }
+    div div.content {
+      display: none;
+      width: 400px;
+      height: 400px;
+      text-align: center;
+      line-height: 400px;
+      font-size: 2em;
+      font-family: monospace;
+      background-color: #eee;
+      border-radius: 3px;
+    }
+
+    .active {
+      background-color: #55ACEE;
+      color: #fff;
+    }
+    div div.selected {
+      display: block;
+      background-color: #55ACEE;
+      color: #fff;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <ul>
+      <li class="active">北京</li>
+      <li>上海</li>
+      <li>广州</li>
+    </ul>
+    <div class="content selected">Beijing</div>
+    <div class="content">Shanghai</div>
+    <div class="content">Guangzhou</div>
+  </div>
+  <script>
+    var wrap = document.getElementById("wrap");
+    var lis = wrap.getElementsByTagName("li");
+    var divs = wrap.getElementsByClassName("content");
+
+    function changeTab (index){
+      lis[index].className = "active";
+      divs[index].className = "content selected";
+    }
+
+    for (var i=0; i<lis.length; i++){
+      (function (i){
+        lis[i].onmouseover = function (){
+        // console.log(i);
+        for (var j=0; j<lis.length; j++){
+          lis[j].className = "";
+          divs[j].className = "content";          
+        }
+        changeTab(i);
+      }
+    })(i);
+  }
+
+
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

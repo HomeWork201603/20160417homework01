@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>mySlice</title>
+</head>
+<body>
+    <script>
+        var arr=[1,2,3,4,5,6,7,8,9,10];
+        Array.prototype.mySlice=function(n,m){
+            var arr=[];
+            if(m==undefined){//在第二个参数没有定义的情况下
+                if(n>=-this.length&&n<=-1){//第一个参数位于[-this.length,-1]这个负数区间内
+                    n+=this.length;
+                }
+                else if(n<-this.length){//第一个参数位于（<-this.length)这个负数区间内
+                    n=0;
+                }
+                else if(n>=this.length){//第一个参数位于（>=this.length)这个负数区间内
+                    return [];
+                }
+                else if(n>=0&&n<this.length){
+
+                }
+                else if(n==undefined){
+                    return this;
+                }
+                for(var i=0;n<this.length;i++){//第一个参数为正常区间[0,this.length-1]内
+                    arr[i]=this[n];
+                    n++;
+                }
+            }
+            else if(n>m){//当n>m时，直接返回[]
+                return [];
+            }
+            else if(n>=-this.length&&n<=this.length-1&&n<m){
+                if(m>=this.length&&n>=0){
+                    m=this.length;
+                    var k=n;
+                }
+                else if(m>=this.length&&n<0){
+                    m=this.length;
+                    n+=this.length;
+                    var k=n;
+                }
+                else if(n>=0&&m<this.length){
+                    var k=n;
+                }
+                else if(n<0&&m<0){
+                    n+=this.length;
+                    m+=this.length;
+                    var k=n;
+                }
+                for(var i=0;i<m-k;i++){
+                    arr[i]=this[n];
+                    n++;
+                }
+            }
+            else if(m>=-this.length&&m<=this.length-1&&n<m){
+                if(n<-this.length&&m>=0){
+                    n=0;
+                }
+                else if(n<-this.length&&m<0){
+                    m+=this.length;
+                    n=0;
+                    var k=n;
+                }
+                for(var i=0;i<m-k;i++){
+                    arr[i]=this[n];
+                    n++;
+                }
+            }
+            else if(n<m&&(m<-this.length||n>=this.length)){
+                return [];
+            }
+            else if(n<-this.length&&m>=this.length){
+                return this;
+            }
+            else if(n>=-this.length&&n<m&&m<=-1){//当-this.length<=n<m<=-1时
+                n+=this.length;
+                m+=this.length;
+                var k=n;//因为下面有n++,须将初始值保留，否则判断条件i<m-n会一直改变
+                for(var i=0;i<m-k;i++){
+                    arr[i]=this[n];
+                    n++;
+                }
+            }
+            return arr;
+        }
+        console.log(arr.slice());
+        console.log(arr.mySlice());
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>选项卡</title>
+    <style type="text/css">
+        body,div,ul,li,ol{
+            margin:0;
+            padding:0;
+            font-family: "Microsoft YaHei", AsimSun, simSun;
+            font-size: 14px;
+        }
+        ul,ol{
+            list-style: none;
+        }
+        #tab{
+            margin:100px auto;
+            width: 1000px;
+            height: 400px;
+        }
+        ul:after{
+            content: '';
+            display: block;
+            line-height: 0;
+            clear:both;
+        }
+        ul li{
+            float: left;
+            margin-right: 20px;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: chocolate;
+        }
+        ul li.on{
+            background: cornflowerblue;
+            color: #000000;
+        }
+        ol li{
+            display: none;
+            border:1px solid #cccccc;
+            height: 300px;
+            line-height: 300px;
+            text-align: center;
+            font-size: 18px;
+        }
+        ol li.on{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="tab">
+    <ul>
+        <li class="on">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <ol>
+        <li class="on">111111111</li>
+        <li>222222222</li>
+        <li>3333333</li>
+        <li>4444444</li>
+    </ol>
+</div>
+<script type="text/javascript">
+    var oTab=document.getElementById('tab');
+    var oLis1=oTab.children[0].children;
+    var oLis2=oTab.children[1].children;
+       /* for(var i=0;i<oLis1.length; i++){
+            (function(i){
+                oLis1[i].onmousemove=function(){
+                    for(var j=0;j<oLis1.length;j++){
+                        oLis1[j].className='';
+                        oLis2[j].className='';
+                    }
+                    this.className='on';
+                    oLis2[i].className='on';
+                };
+            })(i)
+        }
+*/
+        for(var i=0;i<oLis1.length; i++){
+            oLis1[i].onmousemove=(function(i){
+                return function(){
+                    for(var j=0;j<oLis1.length;j++){
+                        oLis1[j].className='';
+                        oLis2[j].className='';
+                    }
+                    this.className='on';
+                    oLis2[i].className='on';
+                }
+            })(i);
+        }
+</script>
+</body>
+</html>

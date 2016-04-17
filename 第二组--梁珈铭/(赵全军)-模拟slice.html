@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    var ary=[1,2,4,5,6,5,3,2,4,6,7,9,6,45,3,2];
+    console.log(ary.slice(1,5));
+    var ary1=[];
+        Array.prototype.mySlice = function (n, m) {
+                // console.log(n);
+                // console.log(m);
+                 if (n == null || n == 0 && m >= 0 && m < ary.length) {
+                     return ary1 = ary.splice(0, m);
+                 } else if (n >= 0 && n <= ary.length && m == null) {
+                     return ary1 = ary.splice(n, ary.length - 1);
+                 } else if (n > 0 && m > 0 && m > n && m < ary.length) {
+                     return ary1 = ary.splice(n, m-n);
+                 } else if (n > ary.length || n>m) {
+                     return ary1 = [];
+
+                 }
+        };
+    console.log(Array.prototype.mySlice(1,5));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>

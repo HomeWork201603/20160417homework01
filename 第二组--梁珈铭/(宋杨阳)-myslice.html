@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    var a=[1,2,3,4,5,6,7,8,9,10];
+    //方法一：
+    /*[].__proto__.myslice=function (){
+     var arr=[];
+     if(arguments.length==0){
+     for(var i=0;i<this.length;i++){
+     arr.push(this[i]);
+     }
+     }else if(arguments.length==1){
+     for(var i=arguments[0];i<this.length;i++){
+     arr.push(this[i]);
+     }
+     }else{
+     for(var i=arguments[0];i<arguments[1];i++){
+     arr.push(this[i]);
+     }
+     }
+     return arr;
+     }
+     var a=[1,2,3,4,5,6,7,8,9,10];
+     var b= a.myslice(2,7);
+     console.log(b);*/
+    //改进后的方法
+    Array.prototype.myslice=function(){
+        var arr=[];
+        for(var i=arguments[0]||0; i<(arguments[1]||this.length);i++){
+            arr.push(this[i]);
+        }
+        return arr;
+    }
+    var a=[1,2,3,4,5,6,7,8,9,10];
+    var b= a.myslice(2);
+    console.dir(b);
+</script>
+</body>
+</html>

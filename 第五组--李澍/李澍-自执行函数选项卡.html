@@ -55,25 +55,22 @@
         }
         oDivs[index].className = 'on';
     }
-
+    //自定义属性
     /*for(var i = 0;i<oLis.length;i++){
         oLis[i].num = i;
         oLis[i].onmouseover = function () {
             tab(this.num);
         }
     }*/
-    /*for(var i = 0;i<oLis.length;i++){
-        (function (x) {
+
+    for(var i = 0;i<oLis.length;i++){
+        (function (i) {
             oLis[i].onmouseover = function () {
-                tab(x);
+                tab(i);
             }
         })(i);
-    }*/
-    for(var i = 0;i<oLis.length;i++){
-        oLis[i].addEventListener("mouseover",(function (x) {
-            tab(x)
-        })(i),'false')
     }
+
 
 
 

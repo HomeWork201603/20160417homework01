@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选项卡</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        .tab{
+            margin: 60px auto;
+            height: 500px;
+            width: 400px;
+        }
+        .tab ul{
+            height: 500px;
+            width: 100px;
+            float: right;
+        }
+        .tab li{
+            margin-bottom: 1px;
+            height: 99px;
+            width: 100px;
+            background: red;
+            text-align: center;
+            font-size: 50px;
+            font-weight: 900;
+            line-height: 99px;
+            color: darkviolet;
+        }
+        .tab div{
+            padding: 50px 125px 0px 125px;
+            height: 450px;
+            width: 50px;
+            background: greenyellow;
+            float: left;
+            font-size: 50px;
+            font-weight: 900;
+            display: none;
+        }
+        .tab div.on{
+            display: block;
+        }
+        .tab li.on{
+            background: fuchsia;
+            color: aqua;
+        }
+
+    </style>
+</head>
+<body>
+   <div id="tab" class="tab">
+       <ul>
+           <li class="on">我</li>
+           <li>的</li>
+           <li>天</li>
+           <li>啊</li>
+           <li>额</li>
+       </ul>
+       <div class="on">我什么我啊</div>
+       <div>白勺的</div>
+       <div>OMG</div>
+       <div>谔谔谔谔</div>
+       <div>啊啊啊啊啊</div>
+   </div>
+</body>
+</html>
+<script>
+
+    !(function(){
+    var tab=document.getElementById("tab");
+    var oDiv=tab.getElementsByTagName("div");
+    var oLis=tab.getElementsByTagName("li");
+        for(var i=0;i<oLis.length;i++){
+            !(function (a) {
+                oLis[a].onmousemove=function(){
+                for(var j=0;j<oLis.length;j++){
+                    oLis[j].className="";
+                    oDiv[j].className="";
+                }
+                    oLis[a].className="on";
+                    oDiv[a].className="on";
+            }
+            })(i);
+        }
+    })()
+</script>

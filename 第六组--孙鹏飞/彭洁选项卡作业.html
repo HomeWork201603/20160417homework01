@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{margin:0;padding:0;list-style:none;}
+        .box{width:500px;margin:100px auto;}
+        .box li{float:left;width:100px;height:30px;line-height:30px;text-align:center;background:#ccc; cursor:pointer;}
+        .box div{display:none;background:lightseagreen;width:300px;height:300px;line-height:300px;text-align:center;clear:both;}
+        .box li.active{background:lightseagreen;}
+        .box div.selected{display:block;}
+
+    </style>
+</head>
+<body>
+<div id="box" class="box">
+    <ul>
+        <li class="active">电影</li>
+        <li>音乐</li>
+        <li>游戏</li>
+    </ul>
+        <div class="selected">电影</div>
+        <div>音乐</div>
+        <div>游戏</div>
+</div>
+<script>
+    var oBox = document.getElementById("box");
+    var aLis = oBox.getElementsByTagName("li");
+    var aDivs =oBox.getElementsByTagName("div");
+    for(var i=0;i<aLis.length;i++){
+        (function(m){
+            aLis[i].onclick=function(){
+                for(var j=0;j<aLis.length;j++){
+                    aLis[j].className="";
+                    aDivs[j].className="";
+                }
+                this.className="active";
+                aDivs[m].className="selected";
+            }
+        })(i)
+    }
+</script>
+</body>
+</html>

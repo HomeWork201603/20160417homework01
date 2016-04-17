@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body, div, ul, li {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        #tab {
+            width: 500px;
+            margin: 0 auto;
+
+        }
+
+        #tab ul {
+            position: relative;
+            top: 1px;
+        }
+
+        #tab li {
+            float: left;
+            margin-right: 10px;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        #tab ul li.select {
+            background-color: aqua;
+        }
+
+        #tab div {
+            display: none;
+            width: 500px;
+            height: 200px;
+            border: 1px solid #ccc;
+            clear: both;
+        }
+
+        #tab div.select {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div id="tab">
+    <ul>
+        <li class="select">图片</li>
+        <li>视频</li>
+        <li>秒拍</li>
+    </ul>
+    <div class="select"> 数组去重排序数组去重排序数组去重排序数组去重排序数组去重排序数组去重排序数组去重排序数组去重排序数组去重排序数组去重排序</div>
+    <div>99乘法表99乘法表99乘法表99乘法表99乘法表99乘法表99乘法表99乘法表99乘法表99乘法表99乘法表99乘法表99乘法表99乘法表99乘法表99乘法表99乘法表</div>
+    <div>选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡选项卡</div>
+</div>
+
+<script>
+    var lis = document.getElementById('tab').getElementsByTagName('li')
+    var divs = document.getElementById('tab').getElementsByTagName('div')
+    function tab() {
+        for (var i = 0; i < lis.length; i++) {
+            (function (i) {
+                lis[i].onclick = function () {
+                    for (var j = 0; j < lis.length; j++) {
+                        lis[j].className = '';
+                        divs[j].className = ''
+                    }
+                    lis[i].className = 'select'
+                    divs[i].className = 'select'
+                }
+            })(i)
+        }
+    }
+    tab()
+</script>
+</body>
+</html>

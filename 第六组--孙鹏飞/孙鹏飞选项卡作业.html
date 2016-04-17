@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        #wrap {
+            width: 500px;
+            height: 400px;
+            margin: 50px auto;
+        }
+
+        #wrap ul {
+            position: relative;
+            top: 1px;
+        }
+
+        #wrap ul li {
+            background: red;
+            float: left;
+            margin-left: 50px;
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        #wrap ul li.select {
+            background: #999999;
+        }
+
+        #wrap div {
+            float: left;
+            display: none;
+            height: 350px;
+            width: 500px;
+            line-height: 350px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        #wrap div.select {
+            display: block;
+            background: #999999;
+        }
+    </style>
+</head>
+<body>
+<div id="wrap">
+    <ul>
+        <li class="select">河南</li>
+        <li>河北</li>
+        <li>湖南</li>
+    </ul>
+    <div class="select">郑州</div>
+    <div>石家庄</div>
+    <div>长沙</div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    var oWrap = document.getElementById("wrap");
+    var oLis = oWrap.getElementsByTagName("li");
+    var oDiv = oWrap.getElementsByTagName("div");
+    function fn(n) {
+        for (var i = 0; i < oLis.length; i++) {
+            oLis[i].className = "";
+            oDiv[i].className = "";
+        }
+        oLis[n].className = "select";
+        oDiv[n].className = "select";
+    }
+
+    
+    for (var i = 0; i < oLis.length; i++) {
+        oLis[i].shengfenzheng = i;
+        oLis[i].onmousemove = function () {
+            fn(this.shengfenzheng)
+        }
+    }
+
+
+
+    for (var i = 0; i < oLis.length; i++) {
+        (function (i) {
+            oLis[i].onmousemove = function () {
+                fn(i)
+            }
+        })(i);
+    } //异步：你做我也同时在做  把异步的用自执行函数包起来
+
+
+
+
+    function fn() {
+        for (var j = 0; j < oLis.length; j++) {
+            +(function (n) {
+                oLis[j].onmousemove = function () {
+                    for (var i = 0; i < oLis.length; i++) {
+                        oLis[i].className = "";
+                        oDiv[i].className = "";
+                    }
+                    oLis[n].className = "select";
+                    oDiv[n].className = "select";
+                };
+            })(j)
+        }
+    }
+    fn();
+</script>

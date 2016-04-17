@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>选项卡</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        #box ul {
+            position: relative;
+            overflow: hidden;
+            top: 1px;
+        }
+
+        #box ul li {
+            float: left;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+            border: 1px solid red;
+
+        }
+
+        #box div {
+            display: none;
+            height: 300px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid red;
+        }
+
+        #box div.select {
+            background: pink;
+            display: block;
+        }
+
+        #box li.select {
+            background: pink;
+
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li class="select">北京</li>
+        <li>上海</li>
+        <li>广州</li>
+    </ul>
+    <div class="select">天安门</div>
+    <div>东方明珠</div>
+    <div>深圳</div>
+</div>
+<script type="text/javascript">
+    var oBox = document.getElementById('box');
+    var oLis = oBox.getElementsByTagName('li');
+    var oDiv = oBox.getElementsByTagName('div');
+    function Change(n) {
+        for (var i = 0; i < oLis.length; i++) {
+            oLis[i].className = "";
+            oDiv[i].className = "";
+        }
+        oLis[n].className = "select";
+        oDiv[n].className = "select";
+    }
+    for (var i = 0; i < oLis.length; i++) {
+        ~(function (j) {
+            oLis[i].onclick = function () {
+               Change(j);
+            }
+        })(i);
+    }
+
+</script>
+</body>
+</html>

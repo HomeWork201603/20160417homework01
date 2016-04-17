@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>选项卡</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .outer{
+            margin: 30px auto;
+            width: 350px;
+
+        }
+        .outer li{
+            margin-left: 10px;
+            display: inline-block;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            background: #ccc;
+            cursor: pointer;
+        }
+        .outer li.active{
+            background: red;
+        }
+
+        .outer .content{
+            display: none;
+            width: 350px;
+            height: 300px;
+            text-align: center;
+            line-height: 300px;
+            font-size: 30px;
+            font-weight: bold;
+            background: #ccc;
+        }
+        .outer .content.selected{
+            display: block;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <ul>
+            <li class="active">北京</li>
+            <li>上海</li>
+            <li>广州</li>
+        </ul>
+        <div class="content selected">北京</div>
+        <div class="content">上海</div>
+        <div class="content">广州</div>
+    </div>
+</body>
+</html>
+<script>
+    var oLis = document.getElementsByClassName('outer')[0].getElementsByTagName('li');
+    var oDivs = document.getElementsByClassName('outer')[0].getElementsByClassName('content');
+    function tab(){
+         for(var i=0; i<oLis.length; i++){
+            // oLis[i].selfIndex = i;
+            (function(n){
+                oLis[n]['onmouseover'] = function (){
+                   for(var j=0; j<oLis.length; j++){
+                        oLis[j].className = '';
+                        oDivs[j].className = 'content';
+                    }
+                    oLis[n].className = 'active';
+                    oDivs[n].className = 'content selected';
+               }
+           })(i);
+            
+        }
+    }
+   tab();
+</script>

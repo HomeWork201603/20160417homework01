@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0
+    }
+
+    #tab {
+        width: 400px;
+        margin: auto;
+    }
+
+    #tab li {
+        width: 100px;
+        height: 50px;
+        display: inline-block;
+        border: 1px solid #dedede;
+        border-bottom: 0;
+    }
+
+    #tab .select {
+        background: red;
+    }
+
+    #tab div {
+        border: 1px solid #dedede;
+        height: 200px;
+        border-top: 0;
+        display: none;
+    }
+
+    #tab div.select {
+        display: block;
+    }
+</style>
+<body>
+<div id="tab">
+    <ul>
+        <li class="select">tab1</li>
+        <li>tab2</li>
+        <li>tab3</li>
+    </ul>
+    <div class="select">内容1</div>
+    <div>内容2</div>
+    <div>内容3</div>
+</div>
+<script>
+    var oTab = document.getElementById("tab");
+    var oLis = oTab.getElementsByTagName("li");
+    var oDivs = oTab.getElementsByTagName("div");
+    // 实现选项卡的卡与内容联动。
+    //    function tab() {
+    //        var index = arguments[0];
+    //        for (var i = 0; i < oLis.length; i++) {
+    //            oLis[i].className = oDivs[i].className = "";
+    //        }
+    //        oLis[index].className = oDivs[index].className = "select";
+    //    }
+    // 循环绑定点击事件（自定义属性）
+    //    for (var i = 0; i < oLis.length; i++) {
+    //        oLis[i].setAttribute("data-index", i.toString());
+    //        oLis[i].onclick = function () {
+    //            tab(this.getAttribute("data-index"));
+    //        };
+    //    }
+    // 循环绑定点击事件（闭包）
+    for (var i = 0; i < oLis.length; i++) {
+        oLis[i].onclick = (function (index) {
+            return function () {
+                for (var i = 0; i < oLis.length; i++) {
+                    oLis[i].className = oDivs[i].className = "";
+                }
+                oLis[index].className = oDivs[index].className = "select";
+            }
+        })(i)
+    }
+
+
+</script>
+</body>
+</html>

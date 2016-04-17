@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>选项卡&闭包</title>
+    <style>
+        body,div,ul,li{
+            margin: 0;
+            padding:0;
+            font-family: '黑体';
+            font-size: 16px;
+        }
+        ul,li{
+            list-style: none;
+        }
+        #tab{
+            margin: 20px auto 0;
+            width: 500px;
+            /*border: 1px solid #999;*/
+        }
+        #tab ul{
+            position: relative;
+            top:1px;
+        }
+        #tab ul li{
+            float: left;
+            margin-right: 10px;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid #999;
+            cursor: pointer;
+        }
+        #tab ul li.select{
+            color:#ffffff;
+            border-bottom: none;
+            background: -webkit-linear-gradient(top left,yellow,blue,green);
+        }
+        #tab div{
+            display: none;
+            clear: both;
+            height: 300px;
+            border: 1px solid red;
+        }
+        #tab div.select{
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="tab">
+        <ul>
+            <li class="select">考试</li>
+            <li>考考试</li>
+            <li>考试试</li>
+        </ul>
+        <div class="select">参考</div>
+        <div>动手</div>
+        <div>提高</div>
+    </div>
+    <script>
+        var oTab=document.getElementById("tab");
+        var oLis=oTab.getElementsByTagName("li");
+        var oDivs=oTab.getElementsByTagName("div");
+
+        for(var i=0;i<oLis.length;i++){(function(i){
+            oLis[i].onmouseover=function() {
+                for (var j = 0; j < oLis.length; j++) {
+                    oLis[j].className = "";
+                    oDivs[j].className = "";
+                }
+                var that=oDivs[i];
+                this.className="select";
+                that.className="select";
+            }
+        })(i);
+        }
+    </script>
+</body>
+</html>
+

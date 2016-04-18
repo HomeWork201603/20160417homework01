@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    Array.prototype.myslice = function (m, n) {
+        if ((typeof m === "undefined" && typeof n === "undefined") || m === 0) {//两个都没有
+            return this;
+        }
+        else if (m && typeof n === "undefined") {//一个参数
+            if (!isNaN(m)) {
+                var ary1 = [];
+                if (m < 0) { // 一个参数小于0
+                    if (Math.abs(m) > this.length) { // m 的绝对值大于length
+                        for (var i = 0; i < this.length; i++) {
+                            ary1[ary1.length] = this[i];
+                        }
+                    } else { //m的绝对值小于等于length
+                        for (var i = m + this.length; i < this.length; i++) {
+                            ary1[ary1.length] = this[i];
+                        }
+                    }
+                }
+                else {// 等于零或者大于零时
+                    for (var j = m; j < this.length; j++) {
+                        ary1[ary1.length] = this[j];
+                    }
+                }
+                return ary1;
+            }
+            else {//其他，"a"
+                return this;
+            }
+        }
+        else {//两个参数 及以上
+            if (m && n) {
+                var ary2 = [];
+                if (!isNaN(m) && !isNaN(n)) { //两个有效数字
+
+                    if (m > 0 && n > 0) {//两个正数。小于length
+                        for (var k = m; k < n && k < this.length; k++) {
+                            ary2[ary2.length] = this[k];
+                        }
+                    }
+                    else if (m < 0 && n < 0) {//两个负数
+                        if (Math.abs(m) > this.length) {//如果第一个参数的绝对值大于length
+                            for (var i = 0; i < n + this.length && i < this.length; i++) {
+                                ary2[ary2.length] = this[i];
+                            }
+                        } else {//两个负数，m小于length
+                            for (var i = m + this.length; i < n + this.length && i < this.length; i++) {
+                                ary2[ary2.length] = this[i];
+                            }
+                        }
+                    } else if (m < 0 && n > 0) {//第一个负的，第二个正的
+                        for (var i = m + this.length; i < this.length; i++) {
+                            ary2[ary2.length] = this[i];
+                        }
+                    }
+                }
+                else if (isNaN(m) && !isNaN(n)) {//第一个m不是有效数字
+                    for (var i = 0; i < n && i < this.length; i++) {
+                        ary2[ary2.length] = this[i];
+                    }
+                }
+                return ary2;//
+            }
+        }
+    }
+    var ary = [0, 1, 2, 3, 4];
+    var res = ary.myslice(-100,-101);
+    console.log(res);
+
+
+</script>

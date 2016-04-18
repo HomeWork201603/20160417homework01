@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+
+
+<script>
+    Object.prototype.liWeiSlice = function (n, m) {
+        var arr = [];
+        if (!isNaN(Number(n)) && (Number(n) < 0)) {      //负数情况
+            n = Number(n) + this.length
+        }
+        if (!isNaN(Number(m)) && (Number(m) < 0)) {
+            m = Number(m) + this.length
+        }
+        if (n < 0 || n > this.length - 1) {      //大于数组长度情况
+            return arr;
+        }
+        if (!isNaN(Number(n)) || !isNaN(Number(m))) {     //Number(n)、Number(m)中至少有一个数字
+            if (!(Number(n) && Number(m))) {   //Number(n)、Number(m)中有一个数字的情况
+                var w = null;
+                if (Number(n)) {
+                    w = Number(n);
+                } else {
+                    w = Number(m)
+                }
+                for (var i = w; i < this.length; i++) {
+                    arr[arr.length] = this[i];
+                }
+                return arr;
+            } else if (Number(n) > Number(m)) {         //Number(n)>Number(m)的情况
+                return arr;
+            } else {
+                for (var p = Number(n); p < Number(m); p++) {                   //传两个 Number(n)<=Number(m)的情况
+                    arr[arr.length] = this[p];
+                }
+                return arr;
+            }
+        }
+        else if (n === undefined && m === undefined) {                  //什么也不传的情况
+            for (var j = 0; j < this.length; j++) {
+                arr[arr.length] = this[j];
+            }
+            return arr;
+        }
+        else if (isNaN(Number(n)) && isNaN(Number(m))) {                  //传两个Number(n)、Number(m)不是number的变量的情况
+            return arr;
+        }
+    }
+    var aaa = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+    var bbb = aaa.liWeiSlice('3',7);
+    console.log(bbb);
+</script>

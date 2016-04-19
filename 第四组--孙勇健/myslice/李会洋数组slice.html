@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>数组slice</title>
+</head>
+<body>
+<script>
+    /*能实现的功能：
+    *1、当参数不存在时
+    *2、存在一个参数、两个参数且为正数时
+    *3、存在一个参数、两个参数且为负数时
+    *4、存在一个非有效数字、两个非有效数字时
+    *5、存在当正参数大于数组长度时
+    *6、存在当负参数小于数组长度的相反数时
+    * */
+    Array.prototype.Myslice=function(m,n){
+        var str='';
+        /*当参数都存在且存在非有效数字*/
+        if(n&&m){
+        /*当m和n时非有效数字*/
+        if(!isNaN(m)&&!isNaN(m)){
+            str="";
+            var a = str.split("");console.log(a)
+        }
+        /*当m时非有效数字*/
+        if(isNaN(m)&&n) {
+            for (var i = 0; i < n; i++) {
+                str += this[i];
+            }
+            var a = str.split("");
+            console.log(a)
+        }
+
+        /*当n时非有效数字*/
+        if(isNaN(n)&&m) {
+            str="";
+            var a = str.split("");//console.log(a)
+        }
+    }
+        if(isNaN(m)&&!n){
+            var a = ary;
+        }
+        /*当存在一个正数且数大于数组长度*/
+        if(m>=this.length&&!n){
+            str="";
+            var a = str.split("");//console.log(a)
+        }
+        /*当存在一个负数且数绝对值大于数组长度*/
+        if(m<=-this.length&&!n){
+
+            var a = ary;
+            //console.log(a)
+        }
+        for(var i=0;i<this.length;i++){
+            /*当存在两个正变量时运行*/
+            if(m==i&&n){
+                for(var j=0;j<n-i;j++){
+                    str+=this[i+j];
+                }
+                var a=str.split("");
+                //console.log(str)
+            }
+            /*当变量为0或空使运行*/
+            if(m==0||!m){
+               a=ary
+            }
+            /*当存在一个正变量时运行*/
+            if(m&&m==i&&!n){
+                for(var j=0;j<this.length-i;j++){
+                    str+=this[i+j];
+                    //console.log(str)
+                }
+                var a=str.split("");
+                //console.log(str)
+            }
+            /*参数都为负数*/
+            if(m+this.length==i&&n){
+                for(var j=0;j<this.length+n-i;j++){
+                    str+=this[i+j];
+                }
+                var a=str.split("");
+                console.log(str)
+            }
+            /*一个参数都为负数*/
+            if(this.length+m==i&&!n){
+                for(var j=0;j<this.length-i;j++){
+                    str+=this[i+j];
+                    //console.log(str)
+                }
+                var a=str.split("");
+                //console.log(str)
+            }
+        }
+
+        return a;
+    }
+    var ary=[1,2,3,4,5,6,7,8,9,0];
+    console.log(ary.Myslice(1));
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

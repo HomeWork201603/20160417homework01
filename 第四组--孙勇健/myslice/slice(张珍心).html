@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    /*
+     首先判断：
+     a=[1,2,3,4];
+     a b是否是有效数字
+     1  两者都不是有效数字的时候  返回结果是[];
+     2  前者是有效数字，后者是非有效数字，返回值是[];
+     3  前者是非有效数字，后者是有效数字，
+     1 [1]  2 [1,2]  3[1,2,3] >=4 [1,2,3,4]
+     4  两者都是有效数字时
+     两者都是正   a>b  返回值是[]; 0<=a<b <length or  b>length 返回值[索引a到最后]
+     a>=0  b<0
+     */
+    a = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    console.log(a.slice(-7,-2));
+
+    Array.prototype.mySlice = function (a, b) {
+        var ary = [];
+        if (isNaN(a) && isNaN(b)) {//两个都是非有效数字
+            ary = [];
+        } else if (!isNaN(a) && isNaN(b)) {//前者是有效数字，后者是非有效数字
+            ary = [];
+        } else if (isNaN(a) && !isNaN(b)) {//前者是非有效数字，后者是有效数字
+            if (b >= 0 && b < this.length) {
+                ary = this.splice(0, b);
+            } else if (b > this.length) {
+                ary = this;
+            } else if (b < 0) {
+                b += this.length;
+                ary = this.splice(0, b);
+            }
+        } else if (!isNaN(a) && !isNaN(b)) {
+            if (a >= 0 && b >= 0) {
+                if (a > b) {
+                    ary = [];
+                } else if (a < b) {
+                    if (b < this.length) {
+                        for (var i = a; i < b; i++) {
+                            ary.push(this[i]);
+                        }
+                    } else {
+                        ary = this;
+                    }
+                }
+            }
+            else if (a > 0 && b < 0) {
+                b += this.length;
+                if (a < b) {
+                    for (var j = a; j < b; j++) {
+                        ary.push(this[j]);
+                    }
+                } else {
+                    ary = [];
+                }
+            } else if (a < 0 && b < 0) {
+                if(a>b){
+                    ary=[];
+                }
+                else if(a<b){
+                    b+=this.length;
+                    a+=this.length;
+                    for(var g=a;g<b;g++){
+                        ary.push(this[g]);
+                    }
+                }
+            }else if(a<0&&b>0){
+                ary=[];
+            }
+        }
+        return ary;
+    };
+     console.log(a.mySlice(-3, 2));
+   // console.log(a.mySlice(NaN,NaN));//两个都是非有效数字
+   // console.log(a.mySlice(1,NaN));//前面是有效数字，后面是非有效数字
+    //console.log(a.mySlice(NaN,1));//前面是非有效数字，后面是有效数字
+    //console.log(a.mySlice(2,5));//前面是大于0有效数字，后面是大于0有效数字
+    //console.log(a.mySlice(5,2));//5大于2的时候
+    //console.log(a.mySlice(2,-1));//前面是大于0有效数字，后面是小于0有效数字（2《-1+9）
+  //  console.log(a.mySlice(5,-6));//前面是大于0有效数字，后面是小于0有效数字（5》-6+9）
+   //console.log(a.mySlice(-7,-2));//前面是小于0有效数字，后面是小于0有效数字（-7+9<-2+9）
+    //console.log(a.mySlice(-2,-7));//前面是小于0有效数字，后面是小于0有效数字（-2+9》-7+9）
+</script>
+</body>
+</html>
